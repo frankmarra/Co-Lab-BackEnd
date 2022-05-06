@@ -82,7 +82,7 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
         view_name='user_detail',
         read_only=True
     )
-    album = Serializers.HyperlinkedRelatedField(
+    album = serializers.HyperlinkedRelatedField(
         view_name='album_detail',
         read_only=True
     )
