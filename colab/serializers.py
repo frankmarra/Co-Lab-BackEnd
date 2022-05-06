@@ -22,7 +22,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'userName', 'userEmail', 'userPic',
-                  'userAbout', 'userSpotPlay', 'tracks', 'albums', 'collabs')
+                  'userAbout', 'userSpotPlay', 'tracks', 'albums', 'collabs', 'userCollabCount')
 
 
 class AlbumSerializer(serializers.HyperlinkedModelSerializer):
@@ -107,6 +107,9 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
         read_only=True
     )
 
+    class Meta:
+        model = Track
+        fields = ('id', 'trackName', 'trackDescription', 'trackAudio', 'user', 'genres', 'needs', 'metadata', 'album', 'collabs',)
 
 class CollabSerializer(serializers.HyperlinkedModelSerializer):
     users = serializers.HyperlinkedRelatedField(
@@ -118,3 +121,7 @@ class CollabSerializer(serializers.HyperlinkedModelSerializer):
         view_name='track_detail',
         read_only=True
     )
+
+    class Meta:
+        model = Collab
+        fields = ('id', 'users', 'track', 'collabComplete')

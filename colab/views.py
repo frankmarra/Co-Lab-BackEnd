@@ -14,6 +14,9 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+# class UserTrackList(generics.ListCreateAPIView):
+#     queryset = Track.objects.filter(user_id=User)
+#     serializer_class = TrackSerializer
 
 class AlbumList(generics.ListCreateAPIView):
     queryset = Album.objects.all()
@@ -57,19 +60,19 @@ class MetadataDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class TrackList(generics.ListCreateAPIView):
     queryset = Track.objects.all()
-    serializer_class = Track.objects.all()
+    serializer_class = TrackSerializer
 
 
 class TrackDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Track.objects.all()
-    serializer_class = Track.objects.all()
+    serializer_class = TrackSerializer
 
 
 class CollabList(generics.ListCreateAPIView):
     queryset = Collab.objects.all()
-    serializer_class = Collab.objects.all()
+    serializer_class = CollabSerializer
 
 
 class CollabDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Collab.objects.all()
-    serializer_class = Collab.objects.all()
+    serializer_class = CollabSerializer

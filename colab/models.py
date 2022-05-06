@@ -9,6 +9,7 @@ class User(models.Model):
     userPic = models.TextField(blank=True)
     userAbout = models.TextField(blank=True)
     userSpotPlay = models.TextField(blank=True)
+    userCollabCount = models.IntegerField(default=0)
 
     class Meta:
         ordering = ['userName']
@@ -67,9 +68,9 @@ class Track(models.Model):
     trackAudio = models.TextField()
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='tracks')
-    genres = models.ManyToManyField(Genre, related_name='genres')
-    needs = models.ManyToManyField(Need, related_name='needs')
-    metadata = models.ManyToManyField(Metadata, related_name='metadata')
+    genres = models.ManyToManyField(Genre, related_name='tracks')
+    needs = models.ManyToManyField(Need, related_name='tracks')
+    metadata = models.ManyToManyField(Metadata, related_name='tracks')
     album = models.ForeignKey(
         Album, on_delete=models.CASCADE, related_name='tracks', blank=True, null=True)
 
@@ -82,5 +83,5 @@ class Track(models.Model):
 
 class Collab(models.Model):
     users = models.ManyToManyField(User, related_name='collabs')
-    track = models.ForeignKey(Track, on_delete=models.SET(
-        'track deleted'), related_name='collabs')
+    track = models.ForeignKey(Track, on_delete=models.CASCADE, related_name='collabs')
+    collabComplete = models.BooleanField(default=False)
