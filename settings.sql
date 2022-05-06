@@ -1,0 +1,3 @@
+CREATE DATABASE colab;
+CREATE USER colabuser WITH PASSWORD 'colab';
+GRANT ALL PRIVILEGES ON DATABASE colab TO colabuser;
