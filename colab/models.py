@@ -82,4 +82,5 @@ class Track(models.Model):
 
 class Collab(models.Model):
     users = models.ManyToManyField(User, related_name='collabs')
-    tracks = models.ManyToManyField(Track, related_name='collabs')
+    track = models.ForeignKey(Track, on_delete=models.SET(
+        'track deleted'), related_name='collabs')
