@@ -20,6 +20,36 @@ module.exports = {
       trackLikes: {
         type: Sequelize.INTEGER
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        field: 'userId',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'users',
+          key: 'id'
+        }
+      },
+      albumId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        field: 'albumId',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'albums',
+          key: 'id'
+        }
+      },
+      collabId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        field: 'collabId',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'collabs',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -39,7 +39,37 @@ module.exports = (sequelize, DataTypes) => {
       trackName: DataTypes.STRING,
       trackDescription: DataTypes.STRING,
       trackAudio: DataTypes.STRING,
-      trackLikes: DataTypes.INTEGER
+      trackLikes: DataTypes.INTEGER,
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: 'userId',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'users',
+          key: 'id'
+        }
+      },
+      albumId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        field: 'albumId',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'albums',
+          key: 'id'
+        }
+      },
+      collabId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        field: 'collabId',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'collabs',
+          key: 'id'
+        }
+      }
     },
     {
       sequelize,

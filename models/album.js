@@ -22,7 +22,17 @@ module.exports = (sequelize, DataTypes) => {
   }
   Album.init(
     {
-      albumName: DataTypes.STRING
+      albumName: DataTypes.STRING,
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: 'userId',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'users',
+          key: 'id'
+        }
+      }
     },
     {
       sequelize,
