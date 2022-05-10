@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       })
       User.belongsToMany(models.Collab, {
         through: models.UserCollabs,
-        as: 'users',
+        as: 'collabs',
         foreignKey: 'userId'
       })
     }

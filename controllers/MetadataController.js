@@ -2,7 +2,7 @@ const { Metadata } = require('../models')
 
 const GetAllMetadata = async (req, res) => {
   try {
-    const metadata = await Metadata.findAll()
+    const metadata = await Metadata.findAll({ include: 'tracks' })
     res.send(metadata)
   } catch (error) {
     throw error
@@ -12,7 +12,7 @@ const GetAllMetadata = async (req, res) => {
 const GetMetadata = async (req, res) => {
   try {
     let metadataId = parseInt(req.params.metadata_id)
-    let metadata = await Metadata.findByPk(metadataId)
+    let metadata = await Metadata.findByPk(metadataId, { include: 'tracks' })
     res.send(metadata)
   } catch (error) {
     throw error

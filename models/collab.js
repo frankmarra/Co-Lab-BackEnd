@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Collab.belongsToMany(models.User, {
+        as: 'users',
         through: models.UserCollabs,
-        as: 'collab_number',
         foreignKey: 'collabId'
       })
       Collab.belongsTo(models.Track, {
-        foreignKey: 'trackId',
         as: 'collab',
+        foreignKey: 'trackId',
         onDelete: 'CASCADE'
       })
     }

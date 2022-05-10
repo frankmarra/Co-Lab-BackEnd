@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Metadata.belongsToMany(models.Track, {
         through: models.MetadataTracks,
-        as: 'track_metadata',
+        as: 'tracks',
         foreignKey: 'metadataId'
       })
     }

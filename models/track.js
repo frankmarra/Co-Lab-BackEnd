@@ -25,17 +25,17 @@ module.exports = (sequelize, DataTypes) => {
       })
       Track.belongsToMany(models.Genre, {
         through: models.GenreTracks,
-        as: 'genre_track',
+        as: 'genres',
         foreignKey: 'trackId'
       })
       Track.belongsToMany(models.Need, {
         through: models.NeedTracks,
-        as: 'need_track',
+        as: 'needs',
         foreignKey: 'trackId'
       })
       Track.belongsToMany(models.Metadata, {
         through: models.MetadataTracks,
-        as: 'metadata_track',
+        as: 'metadata',
         foreignKey: 'trackId'
       })
     }

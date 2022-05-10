@@ -2,7 +2,7 @@ const { Need } = require('../models')
 
 const GetNeeds = async (req, res) => {
   try {
-    const needs = await Need.findAll()
+    const needs = await Need.findAll({ include: 'tracks' })
     res.send(needs)
   } catch (error) {
     throw error
@@ -12,7 +12,7 @@ const GetNeeds = async (req, res) => {
 const GetNeed = async (req, res) => {
   try {
     let needId = parseInt(req.params.need_id)
-    let need = await Need.findByPk(needId)
+    let need = await Need.findByPk(needId, { include: 'tracks' })
     res.send(need)
   } catch (error) {
     throw error
