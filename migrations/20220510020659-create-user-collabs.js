@@ -1,23 +1,27 @@
 'use strict'
+
+const { user } = require('pg/lib/defaults')
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('collabs', {
+    await queryInterface.createTable('usercollabs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      collabComplete: {
-        type: Sequelize.BOOLEAN
-      },
-      trackId: {
+      userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        field: 'trackId',
-        onDelete: 'CASCADE',
         references: {
-          model: 'tracks',
+          model: 'users',
+          key: 'id'
+        }
+      },
+      collabId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'collabs',
           key: 'id'
         }
       },
@@ -32,6 +36,6 @@ module.exports = {
     })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('collabs')
+    await queryInterface.dropTable('usercollabs')
   }
 }

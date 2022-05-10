@@ -40,16 +40,6 @@ module.exports = {
           key: 'id'
         }
       },
-      collabId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        field: 'collabId',
-        onDelete: 'CASCADE',
-        references: {
-          model: 'collabs',
-          key: 'id'
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

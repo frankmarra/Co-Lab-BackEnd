@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       })
       User.belongsToMany(models.Collab, {
-        through: 'UserCollabs'
+        through: models.UserCollabs,
+        as: 'users',
+        foreignKey: 'userId'
       })
     }
   }

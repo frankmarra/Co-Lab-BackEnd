@@ -1,7 +1,7 @@
 'use strict'
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  class Collab extends Model {
+  class GenreTracks extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,26 +9,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Collab.belongsToMany(models.User, {
-        through: models.UserCollabs,
-        as: 'collab_number',
-        foreignKey: 'collabId'
-      })
-      Collab.belongsTo(models.Track, {
-        foreignKey: 'trackId',
-        as: 'collab',
-        onDelete: 'CASCADE'
-      })
     }
   }
-  Collab.init(
+  GenreTracks.init(
     {
-      collabComplete: DataTypes.BOOLEAN,
+      genreId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'genres',
+          key: 'id'
+        }
+      },
       trackId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        field: 'trackId',
-        onDelete: 'CASCADE',
         references: {
           model: 'tracks',
           key: 'id'
@@ -37,9 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Collab',
-      tableName: 'collabs'
+      modelName: 'GenreTracks',
+      tableName: 'genretracks'
     }
   )
-  return Collab
+  return GenreTracks
 }

@@ -1,21 +1,22 @@
 'use strict'
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('collabs', {
+    await queryInterface.createTable('metadatatracks', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      collabComplete: {
-        type: Sequelize.BOOLEAN
+      metadataId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'metadata',
+          key: 'id'
+        }
       },
       trackId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        field: 'trackId',
-        onDelete: 'CASCADE',
         references: {
           model: 'tracks',
           key: 'id'
@@ -32,6 +33,6 @@ module.exports = {
     })
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('collabs')
+    await queryInterface.dropTable('metadatatracks')
   }
 }

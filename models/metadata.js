@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Metadata.belongsToMany(models.Track, {
-        through: 'MetadataTracks'
+        through: models.MetadataTracks,
+        as: 'track_metadata',
+        foreignKey: 'metadataId'
       })
     }
   }

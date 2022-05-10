@@ -1,27 +1,26 @@
 const Router = require('express').Router()
-const controller = require('../controllers/AlbumController')
+const controller = require('../controllers/TrackController')
 const middleware = require('../middleware')
 
-Router.get('/', controller.GetAlbums)
-Router.get('/:album_id', controller.GetAlbum)
-Router.get('/:album_id/tracks', controller.GetAlbumTracks)
+Router.get('/', controller.GetAllTracks)
+Router.get('/:track_id', controller.GetTrack)
 Router.post(
   '/:user_id',
   middleware.stripToken,
   middleware.verifyToken,
-  controller.CreateAlbum
+  controller.CreateTrack
 )
 Router.put(
-  '/:album_id',
+  '/:track_id',
   middleware.stripToken,
   middleware.verifyToken,
-  controller.UpdateAlbum
+  controller.UpdateTrack
 )
 Router.delete(
-  '/:album_id',
+  '/:track_id',
   middleware.stripToken,
   middleware.verifyToken,
-  controller.DestroyAlbum
+  controller.DestroyTrack
 )
 
 module.exports = Router

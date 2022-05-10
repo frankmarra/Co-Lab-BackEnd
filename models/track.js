@@ -19,18 +19,24 @@ module.exports = (sequelize, DataTypes) => {
         as: 'albumTrack',
         onDelete: 'CASCADE'
       })
-      Track.belongsTo(models.Collab, {
-        foreignKey: 'collabId',
-        as: 'collabTrack'
+      Track.hasOne(models.Collab, {
+        foreignKey: 'trackId',
+        onDelete: 'CASCADE'
       })
       Track.belongsToMany(models.Genre, {
-        through: 'GenreTracks'
+        through: models.GenreTracks,
+        as: 'genre_track',
+        foreignKey: 'trackId'
       })
       Track.belongsToMany(models.Need, {
-        through: 'NeedTracks'
+        through: models.NeedTracks,
+        as: 'need_track',
+        foreignKey: 'trackId'
       })
       Track.belongsToMany(models.Metadata, {
-        through: 'MetadataTracks'
+        through: models.MetadataTracks,
+        as: 'metadata_track',
+        foreignKey: 'trackId'
       })
     }
   }
@@ -57,16 +63,6 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         references: {
           model: 'albums',
-          key: 'id'
-        }
-      },
-      collabId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        field: 'collabId',
-        onDelete: 'CASCADE',
-        references: {
-          model: 'collabs',
           key: 'id'
         }
       }
