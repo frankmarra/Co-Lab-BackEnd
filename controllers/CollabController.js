@@ -65,6 +65,12 @@ const UpdateCollab = async (req, res) => {
       req.body.addUsers.forEach(async (user) => {
         const collabUser = await User.findAll({ where: { id: user.userId } })
         await collab[0].addUser(collabUser)
+        let userCollabCount = collabUser[0].userCollabCount
+        userCollabCount++
+        let userUpdate = {
+          userCollabCount: userCollabCount
+        }
+        await collabUser[0].update(userUpdate)
       })
     }
     if (req.body.removeUsers) {
@@ -75,6 +81,14 @@ const UpdateCollab = async (req, res) => {
           }
         })
         await collab[0].removeUser(collabUser)
+        if (collabUser[0].userCollabCount > 0) {
+          let userCollabCount = collabUser[0].userCollabCount
+          userCollabCount--
+          let userUpdate = {
+            userCollabCount: userCollabCount
+          }
+          await collabUser[0].update(userUpdate)
+        }
       })
     }
     res.send(updatedCollab)
