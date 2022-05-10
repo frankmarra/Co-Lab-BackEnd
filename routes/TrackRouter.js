@@ -4,6 +4,7 @@ const middleware = require('../middleware')
 
 Router.get('/', controller.GetAllTracks)
 Router.get('/:track_id', controller.GetTrack)
+Router.get('/search/data', controller.SearchTrack)
 Router.post(
   '/:user_id',
   middleware.stripToken,

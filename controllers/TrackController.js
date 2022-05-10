@@ -1,5 +1,8 @@
 const { Track, Need, Metadata, Genre } = require('../models')
 const genre = require('../models/genre')
+const metadata = require('../models/metadata')
+const need = require('../models/need')
+const { Op } = require('sequelize')
 
 const GetAllTracks = async (req, res) => {
   try {
@@ -153,10 +156,188 @@ const DestroyTrack = async (req, res) => {
   }
 }
 
+const SearchTrack = async (req, res) => {
+  let searchGenres
+  let searchMetadata
+  let searchNeeds
+  if (!req.query.genres) {
+    searchGenres = 0
+  } else if (req.query.genres.length == 1) {
+    searchGenres = parseInt(req.query.genres)
+  } else {
+    searchGenres = []
+    req.query.genres.forEach((genre) => {
+      genre = parseInt(genre)
+      searchGenres.push(genre)
+    })
+  }
+  if (!req.query.metadata) {
+    searchMetadata = 0
+  } else if (req.query.metadata.length == 1) {
+    searchMetadata = parseInt(req.query.metadata)
+  } else {
+    searchMetadata = []
+    req.query.metadata.forEach((data) => {
+      data = parseInt(data)
+      searchMetadata.push(data)
+    })
+  }
+  if (!req.query.needs) {
+    searchNeeds = 0
+  } else if (req.query.needs.length == 1) {
+    searchNeeds = parseInt(req.query.needs)
+  } else {
+    searchNeeds = []
+    req.query.needs.forEach((need) => {
+      need = parseInt(need)
+      searchNeeds.push(need)
+    })
+  }
+
+  if (searchNeeds != 0 && searchMetadata == 0 && searchGenres == 0) {
+    try {
+      const tracks = await Track.findAll({
+        include: [
+          {
+            association: 'needs',
+            where: { id: searchNeeds },
+            through: { attributes: [] }
+          }
+        ]
+      })
+      res.send(tracks)
+    } catch (error) {
+      throw error
+    }
+  }
+  if (searchNeeds == 0 && searchMetadata != 0 && searchGenres == 0) {
+    try {
+      const tracks = await Track.findAll({
+        include: [
+          {
+            association: 'metadata',
+            where: { id: searchMetadata },
+            through: { attributes: [] }
+          }
+        ]
+      })
+      res.send(tracks)
+    } catch (error) {
+      throw error
+    }
+  }
+  if (searchNeeds == 0 && searchMetadata == 0 && searchGenres != 0) {
+    try {
+      const tracks = await Track.findAll({
+        include: [
+          {
+            association: 'genres',
+            where: { id: searchGenres },
+            through: { attributes: [] }
+          }
+        ]
+      })
+      res.send(tracks)
+    } catch (error) {
+      throw error
+    }
+  }
+  if (searchNeeds != 0 && searchMetadata != 0 && searchGenres == 0) {
+    try {
+      const tracks = await Track.findAll({
+        include: [
+          {
+            association: 'needs',
+            where: { id: searchNeeds },
+            through: { attributes: [] }
+          },
+          {
+            association: 'metadata',
+            where: { id: searchMetadata },
+            through: { attributes: [] }
+          }
+        ]
+      })
+      res.send(tracks)
+    } catch (error) {
+      throw error
+    }
+  }
+  if (searchNeeds != 0 && searchMetadata == 0 && searchGenres != 0) {
+    try {
+      const tracks = await Track.findAll({
+        include: [
+          {
+            association: 'needs',
+            where: { id: searchNeeds },
+            through: { attributes: [] }
+          },
+          {
+            association: 'genres',
+            where: { id: searchGenres },
+            through: { attributes: [] }
+          }
+        ]
+      })
+      res.send(tracks)
+    } catch (error) {
+      throw error
+    }
+  }
+  if (searchNeeds == 0 && searchMetadata != 0 && searchGenres != 0) {
+    try {
+      const tracks = await Track.findAll({
+        include: [
+          {
+            association: 'genres',
+            where: { id: searchGenres },
+            through: { attributes: [] }
+          },
+          {
+            association: 'metadata',
+            where: { id: searchMetadata },
+            through: { attributes: [] }
+          }
+        ]
+      })
+      res.send(tracks)
+    } catch (error) {
+      throw error
+    }
+  }
+  if (searchNeeds != 0 && searchMetadata != 0 && searchGenres != 0) {
+    try {
+      const tracks = await Track.findAll({
+        include: [
+          {
+            association: 'needs',
+            where: { id: searchNeeds },
+            through: { attributes: [] }
+          },
+          {
+            association: 'genres',
+            where: { id: searchGenres },
+            through: { attributes: [] }
+          },
+          {
+            association: 'metadata',
+            where: { id: searchMetadata },
+            through: { attributes: [] }
+          }
+        ]
+      })
+      res.send(tracks)
+    } catch (error) {
+      throw error
+    }
+  }
+}
+
 module.exports = {
   GetAllTracks,
   GetTrack,
   CreateTrack,
   UpdateTrack,
-  DestroyTrack
+  DestroyTrack,
+  SearchTrack
 }
