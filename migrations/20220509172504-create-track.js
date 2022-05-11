@@ -20,6 +20,9 @@ module.exports = {
       trackLikes: {
         type: Sequelize.INTEGER
       },
+      trackArt: {
+        type: Sequelize.STRING
+      },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,

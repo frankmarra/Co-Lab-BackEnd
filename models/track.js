@@ -46,6 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       trackDescription: DataTypes.STRING,
       trackAudio: DataTypes.STRING,
       trackLikes: DataTypes.INTEGER,
+      trackArt: DataTypes.STRING,
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
