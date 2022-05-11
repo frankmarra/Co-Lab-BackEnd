@@ -41,7 +41,6 @@ const CreateCollab = async (req, res) => {
     let collab = await Collab.create(newCollab)
     req.body.users.forEach(async (user) => {
       const collabUser = await User.findAll({ where: { id: user.userId } })
-      console.log('create collab user:', collabUser)
       await collab.addUser(collabUser)
     })
     res.send(collab)
