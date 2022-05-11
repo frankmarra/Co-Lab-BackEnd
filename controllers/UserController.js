@@ -12,7 +12,17 @@ const GetUsers = async (req, res) => {
 const GetUser = async (req, res) => {
   try {
     let userId = parseInt(req.params.user_id)
-    const user = await User.findByPk(userId, { include: 'collabs' })
+    const user = await User.findByPk(userId, {
+      include: [
+        {
+          association: 'collabs'
+        },
+        {
+          model: Track,
+          where: { userId: userId }
+        }
+      ]
+    })
     res.send(user)
   } catch (error) {
     throw error
