@@ -2,13 +2,14 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInser('tracks', [
+    return queryInterface.bulkInsert('tracks', [
       {
         trackName: 'Where Eagles Dare',
         trackDescription: 'Cover a great Misfits song',
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652230404/Where_Eagles_Dare9_tny8pg.mp3',
         userId: 4,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -18,6 +19,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652230093/Bette_Davis_Eyes2_cll0ii.mp3',
         userId: 4,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -28,6 +30,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652229826/MISERY_LOVES_COMEDY_llx4nz.mp3',
         userId: 5,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -37,6 +40,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652229787/If_these_binoculars_could_talkV4_hsnell.mp3',
         userId: 5,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -46,6 +50,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652229679/I_DIDNT_MAKE_ENOUGH_COFFEE_cbkrgl.mp3',
         userId: 1,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -55,6 +60,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652229648/BRAZILV3_tbczhl.mp3',
         userId: 5,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -65,6 +71,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652229637/SPIRAL_STAIRS4_yqqvep.mp3',
         userId: 1,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -75,6 +82,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652229277/REGURGITATOR3_vubvmg.mp3',
         userId: 3,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -85,6 +93,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652229224/FOREMOTHERS_WILL02_thmwlg.mp3',
         userId: 3,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -95,6 +104,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652229075/A_Cassette_Labled_Demo_1983_pe8o1b.mp3',
         userId: 5,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -104,6 +114,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652229066/Cyborg_Demon_Hunters_in_Space_vfcwec.mp3',
         userId: 4,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -113,6 +124,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652228736/Vidja_Gehms_slow_n44vkn.mp3',
         userId: 2,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -122,6 +134,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652228468/Nice_watch_MIX03_ycr5qi.mp3',
         userId: 2,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -131,6 +144,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652228058/funkybap_jljpao.mp3',
         userId: 2,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -140,6 +154,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652227870/Droidz_1_tcnqvk.mp3',
         userId: 1,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -150,6 +165,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652227730/BOARDS_EXPLOSIONS_ifxwks.mp3',
         userId: 3,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -159,6 +175,7 @@ module.exports = {
         trackAudio:
           'https://res.cloudinary.com/silverbeard/video/upload/v1652029890/40_YEAR_OLD_TEENAGERV2_fzudnz.mp3',
         userId: 3,
+        trackLikes: 0,
         createdAt: new Date(),
         updatedAt: new Date()
       }
