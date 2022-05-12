@@ -16,11 +16,11 @@ const GetUser = async (req, res) => {
       include: [
         {
           association: 'collabs'
-        },
-        {
-          model: Track,
-          where: { userId: userId }
         }
+        // {
+        //   model: Track,
+        //   where: { userId: userId }
+        // }
       ]
     })
     res.send(user)
@@ -41,8 +41,23 @@ const GetUserTracks = async (req, res) => {
   try {
     let userId = parseInt(req.params.user_id)
     const tracks = await Track.findAll({
-      where: [{ userId: userId }]
+      where: { userId: userId },
+      include: [
+        {
+          association: 'needs',
+          through: { attributes: [] }
+        },
+        {
+          association: 'genres',
+          through: { attribures: [] }
+        },
+        {
+          association: 'metadata',
+          through: { attributes: [] }
+        }
+      ]
     })
+    res.send(tracks)
   } catch (error) {
     error
   }

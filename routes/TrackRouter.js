@@ -7,8 +7,8 @@ Router.get('/:track_id', controller.GetTrack)
 Router.get('/search/data', controller.SearchTrack)
 Router.post(
   '/:user_id',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.CreateTrack
 )
 Router.put(
