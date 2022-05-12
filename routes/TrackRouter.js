@@ -19,8 +19,8 @@ Router.put(
 )
 Router.delete(
   '/:track_id',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.DestroyTrack
 )
 

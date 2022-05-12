@@ -149,6 +149,30 @@ const UpdateTrack = async (req, res) => {
 const DestroyTrack = async (req, res) => {
   try {
     let trackId = parseInt(req.params.track_id)
+    let track = await Track.findAll({
+      where: { id: trackId },
+      include: [
+        { association: 'needs', through: { attributes: [] } },
+        {
+          association: 'genres',
+          through: { attributes: [] }
+        },
+        {
+          association: 'metadata',
+          through: { attributes: [] }
+        }
+      ]
+    })
+    console.log('track: ', track[0])
+    if (track[0].needs.length > 0) {
+      track[0].needs.forEach((need) => track[0].removeNeed(need))
+    }
+    if (track[0].genres.length > 0) {
+      track[0].genres.forEach((genre) => track[0].removeGenre(genre))
+    }
+    if (track[0].metadata.length > 0) {
+      track[0].metadata.forEach((data) => track[0].removeMetadata(data))
+    }
     await Track.destroy({ where: { id: trackId } })
     res.send({ message: `Track with id of ${trackId} has been removed.` })
   } catch (error) {
