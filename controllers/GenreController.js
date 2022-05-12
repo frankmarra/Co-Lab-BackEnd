@@ -2,7 +2,10 @@ const { Genre } = require('../models')
 
 const GetGenres = async (req, res) => {
   try {
-    const genres = await Genre.findAll({ include: 'tracks' })
+    const genres = await Genre.findAll({
+      order: [['id', 'ASC']],
+      include: 'tracks'
+    })
     res.send(genres)
   } catch (error) {
     throw error

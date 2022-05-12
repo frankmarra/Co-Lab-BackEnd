@@ -2,7 +2,10 @@ const { Need } = require('../models')
 
 const GetNeeds = async (req, res) => {
   try {
-    const needs = await Need.findAll({ include: 'tracks' })
+    const needs = await Need.findAll({
+      order: [['id', 'ASC']],
+      include: 'tracks'
+    })
     res.send(needs)
   } catch (error) {
     throw error

@@ -2,7 +2,10 @@ const { Metadata } = require('../models')
 
 const GetAllMetadata = async (req, res) => {
   try {
-    const metadata = await Metadata.findAll({ include: 'tracks' })
+    const metadata = await Metadata.findAll({
+      order: [['id', 'ASC']],
+      include: 'tracks'
+    })
     res.send(metadata)
   } catch (error) {
     throw error

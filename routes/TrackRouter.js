@@ -13,8 +13,8 @@ Router.post(
 )
 Router.put(
   '/:track_id',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.UpdateTrack
 )
 Router.delete(
