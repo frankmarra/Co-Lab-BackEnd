@@ -7,8 +7,7 @@ const { Op } = require('sequelize')
 const GetAllTracks = async (req, res) => {
   try {
     const tracks = await Track.findAll({
-      include: 'userTrack',
-      attributes: ['userName', 'userEmail']
+      include: 'userTrack'
     })
     res.send(tracks)
   } catch (error) {
