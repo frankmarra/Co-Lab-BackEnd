@@ -27,6 +27,9 @@ module.exports = {
       userPic: {
         type: Sequelize.STRING
       },
+      userBannerPic: {
+        type: Sequelize.STRING
+      },
       userSpotPlay: {
         type: Sequelize.STRING
       },

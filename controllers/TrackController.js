@@ -1,4 +1,4 @@
-const { Track, Need, Metadata, Genre } = require('../models')
+const { Track, Need, Metadata, Genre, User } = require('../models')
 const genre = require('../models/genre')
 const metadata = require('../models/metadata')
 const need = require('../models/need')
@@ -6,7 +6,10 @@ const { Op } = require('sequelize')
 
 const GetAllTracks = async (req, res) => {
   try {
-    const tracks = await Track.findAll()
+    const tracks = await Track.findAll({
+      include: 'userTrack',
+      through: { attributes: ['userName', 'userEmail'] }
+    })
     res.send(tracks)
   } catch (error) {
     throw error
@@ -163,7 +166,6 @@ const DestroyTrack = async (req, res) => {
         }
       ]
     })
-    console.log('track: ', track[0])
     if (track[0].needs.length > 0) {
       track[0].needs.forEach((need) => track[0].removeNeed(need))
     }
@@ -175,6 +177,36 @@ const DestroyTrack = async (req, res) => {
     }
     await Track.destroy({ where: { id: trackId } })
     res.send({ message: `Track with id of ${trackId} has been removed.` })
+  } catch (error) {
+    throw error
+  }
+}
+
+const SearchTrackByName = async (req, res) => {
+  let searchQuery = req.query.word
+  try {
+    const tracks = await Track.findAll({
+      where: {
+        trackName: {
+          [Op.iLike]: '%' + searchQuery + '%'
+        }
+        // [Op.and]: {
+        //   include: [
+        //     {
+        //       association: 'needs',
+        //       where: { needName: { [Op.iLike]: '%' + searchQuery + '%' } }
+        //     }
+        //     // {
+        //     //   association: 'genres'
+        //     // },
+        //     // {
+        //     //   association: 'metadata'
+        //     // }
+        //   ]
+        // }
+      }
+    })
+    res.send(tracks)
   } catch (error) {
     throw error
   }
@@ -221,9 +253,6 @@ const SearchTrack = async (req, res) => {
       searchNeeds.push(need)
     })
   }
-  console.log('search Genres: ', searchGenres)
-  console.log('searchMetadata: ', searchMetadata)
-  console.log('searchNeeds: ', searchNeeds)
 
   if (searchNeeds != 0 && searchMetadata == 0 && searchGenres == 0) {
     try {
@@ -233,6 +262,9 @@ const SearchTrack = async (req, res) => {
             association: 'needs',
             where: { id: searchNeeds },
             through: { attributes: [] }
+          },
+          {
+            association: 'userTrack'
           }
         ]
       })
@@ -249,6 +281,9 @@ const SearchTrack = async (req, res) => {
             association: 'metadata',
             where: { id: searchMetadata },
             through: { attributes: [] }
+          },
+          {
+            association: 'userTrack'
           }
         ]
       })
@@ -265,6 +300,9 @@ const SearchTrack = async (req, res) => {
             association: 'genres',
             where: { id: searchGenres },
             through: { attributes: [] }
+          },
+          {
+            association: 'userTrack'
           }
         ]
       })
@@ -286,6 +324,9 @@ const SearchTrack = async (req, res) => {
             association: 'metadata',
             where: { id: searchMetadata },
             through: { attributes: [] }
+          },
+          {
+            association: 'userTrack'
           }
         ]
       })
@@ -307,6 +348,9 @@ const SearchTrack = async (req, res) => {
             association: 'genres',
             where: { id: searchGenres },
             through: { attributes: [] }
+          },
+          {
+            association: 'userTrack'
           }
         ]
       })
@@ -328,6 +372,9 @@ const SearchTrack = async (req, res) => {
             association: 'metadata',
             where: { id: searchMetadata },
             through: { attributes: [] }
+          },
+          {
+            association: 'userTrack'
           }
         ]
       })
@@ -354,6 +401,9 @@ const SearchTrack = async (req, res) => {
             association: 'metadata',
             where: { id: searchMetadata },
             through: { attributes: [] }
+          },
+          {
+            association: 'userTrack'
           }
         ]
       })
@@ -370,5 +420,6 @@ module.exports = {
   CreateTrack,
   UpdateTrack,
   DestroyTrack,
+  SearchTrackByName,
   SearchTrack
 }
