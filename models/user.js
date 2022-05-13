@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       userPic: DataTypes.STRING,
       userBannerPic: DataTypes.STRING,
       userAbout: DataTypes.STRING,
-      userSpotPlay: DataTypes.STRING,
+      userSpotPlay: DataTypes.STRING(1234),
       userCollabCount: DataTypes.INTEGER
     },
     {
