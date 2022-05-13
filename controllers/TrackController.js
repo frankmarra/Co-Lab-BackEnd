@@ -191,9 +191,9 @@ const SearchTrackByName = async (req, res) => {
       where: {
         trackName: {
           [Op.iLike]: '%' + searchQuery + '%'
-        },
-        include: 'userTrack'
-      }
+        }
+      },
+      include: 'userTrack'
     })
     res.send(tracks)
   } catch (error) {
