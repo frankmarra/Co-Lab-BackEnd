@@ -9,7 +9,13 @@ module.exports = {
     dialect: 'postgres'
   },
   production: {
-    database: 'colab_db_production',
-    dialect: 'postgres'
+    use_env_variable: 'DATABASE_URL',
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false,
+        require: true
+      }
+    }
   }
 }
