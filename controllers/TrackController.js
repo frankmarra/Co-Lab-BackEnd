@@ -8,7 +8,7 @@ const GetAllTracks = async (req, res) => {
   try {
     const tracks = await Track.findAll({
       include: 'userTrack',
-      through: { attributes: ['userName', 'userEmail'] }
+      attributes: ['userName', 'userEmail']
     })
     res.send(tracks)
   } catch (error) {
@@ -33,6 +33,9 @@ const GetTrack = async (req, res) => {
         {
           association: 'metadata',
           through: { attributes: [] }
+        },
+        {
+          model: 'userTrack'
         }
       ]
     })
