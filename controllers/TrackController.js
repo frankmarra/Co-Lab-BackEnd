@@ -184,7 +184,7 @@ const SearchTrack = async (req, res) => {
   let searchGenres
   let searchMetadata
   let searchNeeds
-  if (!req.query.genres) {
+  if (!req.query.genres || req.query.genres == 0 || req.query.genres == []) {
     searchGenres = 0
   } else if (req.query.genres.length == 1) {
     searchGenres = parseInt(req.query.genres)
@@ -195,7 +195,11 @@ const SearchTrack = async (req, res) => {
       searchGenres.push(genre)
     })
   }
-  if (!req.query.metadata) {
+  if (
+    !req.query.metadata ||
+    req.query.metadata == 0 ||
+    req.query.metadata == []
+  ) {
     searchMetadata = 0
   } else if (req.query.metadata.length == 1) {
     searchMetadata = parseInt(req.query.metadata)
@@ -206,7 +210,7 @@ const SearchTrack = async (req, res) => {
       searchMetadata.push(data)
     })
   }
-  if (!req.query.needs) {
+  if (!req.query.needs || req.query.needs == 0 || req.query.needs == []) {
     searchNeeds = 0
   } else if (req.query.needs.length == 1) {
     searchNeeds = parseInt(req.query.needs)
@@ -217,6 +221,9 @@ const SearchTrack = async (req, res) => {
       searchNeeds.push(need)
     })
   }
+  console.log('search Genres: ', searchGenres)
+  console.log('searchMetadata: ', searchMetadata)
+  console.log('searchNeeds: ', searchNeeds)
 
   if (searchNeeds != 0 && searchMetadata == 0 && searchGenres == 0) {
     try {

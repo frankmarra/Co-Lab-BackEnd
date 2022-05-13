@@ -6,8 +6,8 @@ Router.get('/', controller.GetCollabs)
 Router.get('/:collab_id', controller.GetCollab)
 Router.post(
   '/:track_id',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.CreateCollab
 )
 Router.put(

@@ -31,6 +31,7 @@ const GetCollab = async (req, res) => {
 
 const CreateCollab = async (req, res) => {
   try {
+    console.log(req.body)
     let trackId = parseInt(req.params.track_id)
     let newCollab = {
       trackId,
@@ -42,6 +43,12 @@ const CreateCollab = async (req, res) => {
     req.body.users.forEach(async (user) => {
       const collabUser = await User.findAll({ where: { id: user.userId } })
       await collab.addUser(collabUser)
+      let userCollabCount = collabUser[0].userCollabCount
+      userCollabCount++
+      let userUpdate = {
+        userCollabCount: userCollabCount
+      }
+      await collabUser[0].update(userUpdate)
     })
     res.send(collab)
   } catch (error) {

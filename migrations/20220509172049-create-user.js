@@ -30,6 +30,9 @@ module.exports = {
       userSpotPlay: {
         type: Sequelize.STRING
       },
+      userAbout: {
+        type: Sequelize.STRING
+      },
       userCollabCount: {
         type: Sequelize.INTEGER
       },
