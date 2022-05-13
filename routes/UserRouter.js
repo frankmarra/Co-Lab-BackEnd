@@ -8,8 +8,8 @@ Router.get('/:user_id/tracks', controller.GetUserTracks)
 Router.get('/:user_id/albums', controller.GetUserAlbums)
 Router.put(
   '/:user_id',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.UpdateUser
 )
 Router.delete(
