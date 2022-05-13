@@ -12,14 +12,14 @@ Router.post(
 )
 Router.put(
   '/:collab_id',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.UpdateCollab
 )
 Router.delete(
   '/:collab_id',
-  middleware.stripToken,
-  middleware.verifyToken,
+  // middleware.stripToken,
+  // middleware.verifyToken,
   controller.DestroyCollab
 )
 

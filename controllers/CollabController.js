@@ -31,7 +31,6 @@ const GetCollab = async (req, res) => {
 
 const CreateCollab = async (req, res) => {
   try {
-    console.log(req.body)
     let trackId = parseInt(req.params.track_id)
     let newCollab = {
       trackId,

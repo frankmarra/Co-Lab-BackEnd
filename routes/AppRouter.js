@@ -9,8 +9,6 @@ const CollabRouter = require('./CollabRouter')
 const AuthRouter = require('./AuthRouter')
 const middleware = require('../middleware')
 
-// const controller = require('../controllers/AuthController')
-
 Router.use('/users', UserRouter, middleware.stripToken, middleware.verifyToken)
 Router.use('/albums', AlbumRouter)
 Router.use('/genres', GenreRouter)

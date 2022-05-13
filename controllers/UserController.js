@@ -16,11 +16,10 @@ const GetUser = async (req, res) => {
       include: [
         {
           association: 'collabs'
+        },
+        {
+          model: Track
         }
-        // {
-        //   model: Track,
-        //   where: { userId: userId }
-        // }
       ]
     })
     res.send(user)

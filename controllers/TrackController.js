@@ -190,20 +190,6 @@ const SearchTrackByName = async (req, res) => {
         trackName: {
           [Op.iLike]: '%' + searchQuery + '%'
         }
-        // [Op.and]: {
-        //   include: [
-        //     {
-        //       association: 'needs',
-        //       where: { needName: { [Op.iLike]: '%' + searchQuery + '%' } }
-        //     }
-        //     // {
-        //     //   association: 'genres'
-        //     // },
-        //     // {
-        //     //   association: 'metadata'
-        //     // }
-        //   ]
-        // }
       }
     })
     res.send(tracks)
