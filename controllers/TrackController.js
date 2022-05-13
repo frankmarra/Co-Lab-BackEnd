@@ -34,7 +34,7 @@ const GetTrack = async (req, res) => {
           through: { attributes: [] }
         },
         {
-          model: 'userTrack'
+          association: 'userTrack'
         }
       ]
     })
