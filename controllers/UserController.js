@@ -2,7 +2,30 @@ const { User, Track, Album } = require('../models')
 
 const GetUsers = async (req, res) => {
   try {
-    const users = await User.findAll()
+    const users = await User.findAll({
+      include: [
+        {
+          association: 'collabs'
+        },
+        {
+          model: Track,
+          include: [
+            {
+              association: 'needs',
+              through: { attributes: [] }
+            },
+            {
+              association: 'genres',
+              through: { attribures: [] }
+            },
+            {
+              association: 'metadata',
+              through: { attributes: [] }
+            }
+          ]
+        }
+      ]
+    })
     res.send(users)
   } catch (error) {
     throw error
