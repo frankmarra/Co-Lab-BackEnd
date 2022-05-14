@@ -18,7 +18,21 @@ const GetUser = async (req, res) => {
           association: 'collabs'
         },
         {
-          model: Track
+          model: Track,
+          include: [
+            {
+              association: 'needs',
+              through: { attributes: [] }
+            },
+            {
+              association: 'genres',
+              through: { attribures: [] }
+            },
+            {
+              association: 'metadata',
+              through: { attributes: [] }
+            }
+          ]
         }
       ]
     })
