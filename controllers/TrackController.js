@@ -209,7 +209,23 @@ const SearchTrackByName = async (req, res) => {
           [Op.iLike]: '%' + searchQuery + '%'
         }
       },
-      include: 'userTrack'
+      include: [
+        {
+          association: 'needs',
+          through: { attributes: [] }
+        },
+        {
+          association: 'genres',
+          through: { attributes: [] }
+        },
+        {
+          association: 'metadata',
+          through: { attributes: [] }
+        },
+        {
+          association: 'userTrack'
+        }
+      ]
     })
     res.send(tracks)
   } catch (error) {
