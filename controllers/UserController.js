@@ -38,8 +38,7 @@ const GetUser = async (req, res) => {
     const user = await User.findByPk(userId, {
       include: [
         {
-          association: 'collabs',
-          through: { attributes: [] }
+          association: 'collabs'
         },
         {
           model: Track,
