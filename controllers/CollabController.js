@@ -26,7 +26,7 @@ const GetCollab = async (req, res) => {
           association: 'users'
         },
         {
-          association: 'tracks'
+          association: 'collab'
         }
       ]
     })
