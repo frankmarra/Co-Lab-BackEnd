@@ -21,7 +21,14 @@ const GetCollab = async (req, res) => {
     let collabId = parseInt(req.params.collab_id)
     const collab = await Collab.findOne({
       where: { id: collabId },
-      include: ['users', 'tracks']
+      include: [
+        {
+          association: 'users'
+        },
+        {
+          association: 'tracks'
+        }
+      ]
     })
     res.send(collab)
   } catch (error) {
